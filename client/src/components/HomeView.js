@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { Button } from 'reactstrap';
 import Peer from 'peerjs';
 import myPeer from '../lib/peerConnection';
 import { withRouter } from "react-router-dom";
+//import Popup from 'reactjs-popup';
+//import 'reactjs-popup/dist/index.css';
 
 function initialize(){
     var peer  = new Peer('', {
@@ -20,7 +21,8 @@ class HomePage extends Component{
     constructor(props) {
         super(props);
         this.state={
-            alt:1
+            pid:null,
+            mOpen:false
         };
 
         this.createLobby=this.createLobby.bind(this);
@@ -30,12 +32,10 @@ class HomePage extends Component{
     createLobby(history){
         var peer = initialize();
         var ownid = null;
-
         peer.on('open', function(id) {
             ownid = id;
-            alert("Invite you peers using PeerId = "+id);
+            alert('Connect Using PeerID :  ' + id);
         });
-
         // We might move this to game logic file
         peer.on('connection', function(conn) {
             // Store the Peer connection and ID
@@ -46,7 +46,6 @@ class HomePage extends Component{
             // Redirect to Game Page
             history.push('/battleships');
         });
-        
     }
 
     joinLobby(history){
@@ -68,13 +67,13 @@ class HomePage extends Component{
     }
 
     render(){
-        if(this.state.alt===0){
-            return(<h1>Metamask</h1>)
-        }
         return (
-            <div className="buttons">
-                <Button outline color="primary" onClick={() => this.createLobby(this.props.history)}        > Create Lobby    </Button>
-                <Button outline color="success" onClick={() => this.joinLobby(this.props.history)}          > Join            </Button>
+            <div className="homeContainer">
+                <h1>BATTLESHIPS</h1>
+                <div className="buttons">
+                    <button className="homeButton" onClick={() => {this.createLobby(this.props.history)}}>Create Lobby</button>
+                    <button className="homeButton" onClick={() => this.joinLobby(this.props.history)}>Join</button>
+                </div>
             </div>
         );
     }

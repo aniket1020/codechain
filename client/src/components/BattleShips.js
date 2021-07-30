@@ -17,8 +17,10 @@ class BattleGrid extends Component {
         this.opponentReady = false;
         this.turn = false;
 
-        this.userScore = 0;
-        this.opponentScore = 0;
+        this.state={
+            userScore:0,
+            opponentScore:0
+        }
 
         this.battleShips = new Map();
         this.bShip = [];
@@ -46,10 +48,10 @@ class BattleGrid extends Component {
                             if(this.battleShips.get(key).length === 0) continue;
                             for(let i=0;i<this.battleShips.get(key).length;++i){
                                 if(this.battleShips.get(key)[i].x === data.x && this.battleShips.get(key)[i].y === data.y){
-                                    e.style.backgroundColor = "red";
+                                    e.style.backgroundColor="red";
                                     this.battleShips.get(key).splice(i,1);
                                     if(this.battleShips.get(key).length === 0){
-                                        this.opponentScore += 1;
+                                        this.setState({opponentScore:this.state.opponentScore+1});
                                         myPeer.peerConn.send({
                                             type:"SCORE"
                                         });
@@ -91,8 +93,8 @@ class BattleGrid extends Component {
                         }
                         break;
                     case "SCORE":
-                        this.userScore += 1;
-                        if(this.userScore === 5) {
+                        this.setState({userScore:this.state.userScore+1});
+                        if(this.state.userScore === 5) {
                             myPeer.peerConn.send({
                                 type:"WIN"
                             });
@@ -283,12 +285,18 @@ class BattleGrid extends Component {
         }
 
         return (
-            <div className="container">
+            <div className="Container">
                 <div className="row">
-                    <div className="score">
+                    <div className="panel">
                         <div className="names">
-                            <div><Button outline color="success" onClick={this.handleAddBattleShip}>Add Battleship</Button></div>
-                            <div><Button outline color="warning" onClick={this.handleReadyEvent}>Ready</Button></div>
+                            <div className="scoreButton">
+                                <h2>{`Your Score - ${this.state.userScore}`}</h2>
+                                <button className="homeButton add" onClick={this.handleAddBattleShip}>Add Battleship</button>
+                            </div>
+                            <div className="scoreButton">
+                                <h2>{`Opponent Score - ${this.state.opponentScore}`}</h2>
+                                <button className="homeButton ready" onClick={this.handleReadyEvent}>Ready</button>
+                            </div>
                         </div>
                     </div>
                 </div>
