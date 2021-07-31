@@ -71,7 +71,7 @@ class HomePage extends Component{
             <div className="homeContainer">
                 <h1>BATTLESHIPS</h1>
                 <div className="buttons">
-                    <button className="homeButton" onClick={() => {this.createLobby(this.props.history)}}>Create Lobby</button>
+                    <button className="homeButton" onClick={() => this.createLobby(this.props.history)}>Create Lobby</button>
                     <button className="homeButton" onClick={() => this.joinLobby(this.props.history)}>Join</button>
                 </div>
             </div>
