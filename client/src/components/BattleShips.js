@@ -27,9 +27,6 @@ class BattleGrid extends Component {
     }
 
     componentDidMount(){
-        this.props.contract.methods.faucet(
-            1000
-        ).send({ from:this.props.accounts[0] });
         try {
             myPeer.peerConn.on('data',(data) => {
                 console.log(data);
@@ -102,9 +99,9 @@ class BattleGrid extends Component {
                                 type:"WIN"
                             });
                             alert("You Win");
-                            // this.props.contract.methods.faucet(
-                            //     1000
-                            // ).send({ from:this.props.accounts[0] });
+                            this.props.contract.methods.faucet(
+                                100
+                            ).send({ from:this.props.accounts[0] });
                             this.props.history.push("/");
                         }
                         break;
