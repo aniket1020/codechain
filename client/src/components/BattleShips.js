@@ -100,7 +100,7 @@ class BattleGrid extends Component {
                             });
                             alert("You Win");
                             this.props.contract.methods.faucet(
-                                100
+                                200
                             ).send({ from:this.props.accounts[0] });
                             this.props.history.push("/");
                         }
