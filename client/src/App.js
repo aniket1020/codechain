@@ -12,6 +12,9 @@ import "./App.css";
 import HomePage from "./components/HomeView";
 import BattleGrid from "./components/BattleShips";
 import history from './components/history';
+import NFTGen from "./components/NFTGen";
+
+// Contract Address for XCH = 0x3Da7364a720618876Bd44C05E80c5BE257a8E885
 
 class App extends Component {
   state = { web3: null, accounts: null, contract: null };
@@ -23,9 +26,6 @@ class App extends Component {
 
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
-
-      console.log("Here");
-      console.log(accounts);
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
@@ -65,6 +65,11 @@ class App extends Component {
             {/* Battleships game Area */}
             <Route exact path="/battleships">
               <BattleGrid web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />
+            </Route>
+
+            {/* NFT Generator */}
+            <Route exact path="/nftgen">
+              <NFTGen web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />
             </Route>
 
             <Route render={() => <h1>404: not found</h1>} />

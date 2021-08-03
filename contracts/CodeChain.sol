@@ -6,7 +6,12 @@ import '@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol';
 
 contract CodeChain is ERC20Mintable, ERC20Detailed {
     constructor() ERC20Detailed("CodeChain", "XCH", 0) public {}
-    function faucet (uint amount) external {
+    
+    function playerReward (uint amount) external {
       _mint(msg.sender, amount);
+    }
+
+    function NFTGen (uint amount) external {
+      _burn(msg.sender, amount);
     }
 }

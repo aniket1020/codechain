@@ -78,6 +78,7 @@ class HomePage extends Component{
                 <div className="buttons">
                     <button className="homeButton" onClick={() => this.createLobby(this.props.history)}>Create Lobby</button>
                     <button className="homeButton" onClick={() => this.joinLobby(this.props.history)}>Join</button>
+                    {/* <button className="homeButton" onClick={() => this.props.history.push("/nftgen")}>Generate NFT</button> */}
                 </div>
             </div>
         );
