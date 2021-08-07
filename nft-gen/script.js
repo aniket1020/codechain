@@ -60,4 +60,7 @@ function generateRandomNFT() {
     drawTree(centerPointX,canvas.height-80,len,angle,branchWidth,color1,color2);
 }
 
-drawTree(canvas.width/2,canvas.height-80,200,0,20,'brown','green');
+
+
+
+
