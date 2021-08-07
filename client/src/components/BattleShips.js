@@ -1,4 +1,3 @@
-import { Button } from 'reactstrap';
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom';
 import myPeer from '../lib/peerConnection';

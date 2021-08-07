@@ -41,7 +41,7 @@ body{
   font-family: 'Inter';
   display: flex;
   height: 200px;
-  width: 400px;
+  width: 700px;
   justify-content: space-around;
   align-items: center;
   letter-spacing: 2px;
@@ -186,3 +186,50 @@ tr td{
   background-color: rgb(14, 85, 4);
 }
 
+.popup-overlay{
+  background-color: rgba(0, 0, 0, 0.349);
+}
+
+canvas{
+  background-color: rgb(68, 94, 105);
+  border-radius: 50px;
+}
+
+.generateTree{
+  cursor: pointer;
+  outline: none;
+  border: none;
+  z-index: 10;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: brown;
+  color:rgb(240, 248, 255);
+  font-size: 20px;
+  width: 300px;
+  overflow: hidden;
+}
+
+.nftButtons{
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+h2{
+  font-size: 60px;
+  letter-spacing: 2px;
+}
+
+.instructions{
+  margin-top: 30px;
+  height: 500px;
+}
+
+.instructions li{
+  margin-bottom: 30px;
+  font-size: 18px;
+  letter-spacing: 1px;
+  list-style: none;
+}
