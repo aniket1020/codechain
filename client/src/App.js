@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SimpleStorageContract from "./contracts/SimpleStorage.json";
+import CodeChain from "./contracts/CodeChain.json";
 import getWeb3 from "./getWeb3";
 
 import  {
@@ -12,9 +12,12 @@ import "./App.css";
 import HomePage from "./components/HomeView";
 import BattleGrid from "./components/BattleShips";
 import history from './components/history';
+import NFTGen from "./components/NFTGen";
+
+// Contract Address for XCH = 0x3Da7364a720618876Bd44C05E80c5BE257a8E885
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { web3: null, accounts: null, contract: null };
 
   componentDidMount = async () => {
     try {
@@ -26,15 +29,15 @@ class App extends Component {
 
       // Get the contract instance.
       const networkId = await web3.eth.net.getId();
-      const deployedNetwork = SimpleStorageContract.networks[networkId];
+      const deployedNetwork = CodeChain.networks[networkId];
       const instance = new web3.eth.Contract(
-        SimpleStorageContract.abi,
+        CodeChain.abi,
         deployedNetwork && deployedNetwork.address,
       );
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -42,19 +45,6 @@ class App extends Component {
       );
       console.error(error);
     }
-  };
-
-  runExample = async () => {
-    const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });
   };
 
   render() {
@@ -74,7 +64,12 @@ class App extends Component {
 
             {/* Battleships game Area */}
             <Route exact path="/battleships">
-              <BattleGrid/>
+              <BattleGrid web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />
+            </Route>
+
+            {/* NFT Generator */}
+            <Route exact path="/nftgen">
+              <NFTGen web3={this.state.web3} accounts={this.state.accounts} contract={this.state.contract} />
             </Route>
 
             <Route render={() => <h1>404: not found</h1>} />

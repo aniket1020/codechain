@@ -98,6 +98,9 @@ class BattleGrid extends Component {
                                 type:"WIN"
                             });
                             alert("You Win");
+                            this.props.contract.methods.faucet(
+                                200
+                            ).send({ from:this.props.accounts[0] });
                             this.props.history.push("/");
                         }
                         break;

@@ -30,13 +30,6 @@ class HomePage extends Component{
         this.joinLobby=this.joinLobby.bind(this);
     }
 
-    componentDidMount(){
-        const script=document.createElement('script');
-        script.async=true;
-        script.src='../../../nft-gen/script.js'
-        document.body.appendChild(script);
-    }
-
     createLobby(history){
         var peer = initialize();
         var ownid = null;
@@ -57,9 +50,14 @@ class HomePage extends Component{
     }
 
     joinLobby(history){
+
+        var destId = prompt("Destination PeerId");
+
+        if(destId === null) return;
+
         var peer = initialize();
         peer.on('open', function(id) {
-            var destId = prompt("Destination PeerId");
+
             var conn   = peer.connect(destId, {
                 reliable:true
             });
